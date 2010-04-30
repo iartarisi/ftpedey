@@ -24,13 +24,15 @@ class MyTCPHandler(SocketServer.StreamRequestHandler):
             self.retrel(self.cwd())
         elif self.data[0] == "NOOP":
             self.retrel(self.noop())
+        elif self.data[0] == "RETR":
+            self.wfile.write(self.retr())
         else:
             self.wfile.write("500 Syntax error, command unrecognized.")
 
     def retrel(self, directory):
         '''Returns a relative path to the root of the ftp
         '''
-        return self.wfile.write(directory.replace(self.rootdir, "", 1) + "\n")
+        return self.wfile.write(directory.replace(self.rootdir, "", 1))
 
     def pwd(self):
         return "PWD: %s" % os.getcwd()
@@ -72,6 +74,17 @@ class MyTCPHandler(SocketServer.StreamRequestHandler):
             return "CWD: %s" % os.getcwd()
     def noop(self):
         return "OK"
+    def retr(self):
+        try:
+            f = open(self.data[1], 'rb')
+        except IOError as (errno, strerror):
+            if errno == 2:
+                return self.wfile.write("Fisierul '%s' nu exista.")
+        else:
+            fcontent = f.read()
+            f.close()
+            return self.wfile.write(fcontent)
+
 
 if __name__ == "__main__":
     HOST, PORT = "localhost", 5000
