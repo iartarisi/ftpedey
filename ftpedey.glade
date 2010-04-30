@@ -34,6 +34,8 @@
   </object>
   <object class="GtkAccelGroup" id="accelgroup1"/>
   <object class="GtkWindow" id="window1">
+    <property name="width_request">800</property>
+    <property name="height_request">600</property>
     <property name="title" translatable="yes">Ftpedey</property>
     <property name="window_position">center-on-parent</property>
     <accel-groups>
@@ -218,6 +220,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
+                        <signal name="clicked" handler="mkd"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -231,6 +234,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
+                        <signal name="clicked" handler="rmd"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -244,6 +248,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
+                        <signal name="clicked" handler="cwd"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -266,6 +271,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
+                        <signal name="clicked" handler="pwd"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -279,6 +285,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
+                        <signal name="clicked" handler="cdup"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -302,12 +309,15 @@
             </child>
             <child>
               <object class="GtkTextView" id="textview1">
+                <property name="width_request">400</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="editable">False</property>
-                <property name="left_margin">219</property>
+                <property name="left_margin">10</property>
+                <property name="right_margin">2</property>
               </object>
               <packing>
+                <property name="padding">10</property>
                 <property name="position">1</property>
               </packing>
             </child>

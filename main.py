@@ -65,6 +65,9 @@ class MyTCPHandler(SocketServer.StreamRequestHandler):
             os.chdir(self.data[1])
         except IndexError:
             return "Comanda CWD primeste ca argument numele directorului."
+        except OSError as (errno, strerror):
+            if errno == 2:
+                return "Directorul '%s' nu exista." % self.data[1]
         else:
             return "CWD: %s" % os.getcwd()
     def noop(self):
